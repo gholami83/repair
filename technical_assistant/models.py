@@ -1,8 +1,8 @@
 from django.db import models
-from driver.models import Driver
+from django.contrib.auth import get_user_model
 
 
 class TechnicalAssistant(models.Model):
-    username = models.CharField(max_length=40)
-    password = models.CharField(max_length=40)
-    confirmed = models.BooleanField(default=False)
+    assistant = models.OneToOneField(get_user_model(),on_delete=models.CASCADE)
+    class Meta:
+        db_table = 'assistant' 
