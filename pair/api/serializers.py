@@ -10,10 +10,8 @@ class MakePairSerializer(ModelSerializer):
             'date',
         ]   
         
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['pair_request'] = instance.pair_request.pair_description
-        return representation
+    def get_pair_request(self, instance):
+        return instance.pair_request.pair_description
 
 class UpdatePairSerializer(ModelSerializer):
     class Meta:
@@ -23,11 +21,9 @@ class UpdatePairSerializer(ModelSerializer):
             'date',
             'asisstant_confirm',
         ]
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['pair_request'] = instance.pair_request.pair_description
-        return representation
-    
+    def get_pair_request(self, instance):
+        return instance.pair_request.pair_description
+
 class CostPairSerializer(ModelSerializer):
     class Meta:
         model = Pair 
@@ -46,7 +42,5 @@ class PayPairSerializer(ModelSerializer):
             'cost',
             'payed',
         ]
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['pair_request'] = instance.pair_request.pair_description 
-        return representation
+    def get_pair_request(self, instance):
+        return instance.pair_request.pair_description

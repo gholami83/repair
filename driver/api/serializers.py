@@ -10,8 +10,6 @@ class DriverSerializer(ModelSerializer):
             'driver',
             'pair_description',
         ]
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['driver'] = instance.driver.username
-        return representation
+    def get_driver(self, instance):
+        return instance.driver.username
 

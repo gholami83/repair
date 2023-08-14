@@ -9,9 +9,5 @@ class AssistantSerializer(serializers.ModelSerializer):
         fields = [
             'assistant'
         ]
-                
-
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['assistant'] = instance.assistant.username
-        return representation
+    def get_assistant(self, instance):
+        return instance.assistant.username
