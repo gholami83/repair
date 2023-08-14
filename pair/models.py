@@ -3,7 +3,8 @@ from driver.models import Driver
 
 
 class Pair(models.Model):
-    PAIR_CHOICES = Driver.objects.values_list('pair_description',flat=True)
-    pair_request = models.CharField(max_length=50, choices=PAIR_CHOICES)
+    pair_request = models.OneToOneField(Driver,on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
-    cost = models.BigIntegerField()
+    cost = models.BigIntegerField(null=True, blank=True)
+    asisstant_confirm = models.BooleanField(default=False,blank=True)   
+    

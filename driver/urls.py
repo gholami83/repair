@@ -4,8 +4,8 @@ from .viewsets import DriverViewSets
 
 
 router = routers.DefaultRouter()
-router.register('',viewset=DriverViewSets,basename='driver')
+router.register('list',DriverViewSets,basename='driver')
 
 urlpatterns = [
-    path('',include(router.urls)),
+    path('',include(router.urls)),   
 ]

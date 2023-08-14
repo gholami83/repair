@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from ..models import Driver
+from pair.models import Pair
 
 
 class DriverSerializer(ModelSerializer):
@@ -9,3 +10,4 @@ class DriverSerializer(ModelSerializer):
             'driver',
             'pair_description',
         ]
+
