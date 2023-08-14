@@ -10,9 +10,6 @@ class MakePairSerializer(ModelSerializer):
             'date',
         ]   
         
-    def create(self, validated_data):
-        return super().create(validated_data)
-    
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['pair_request'] = instance.pair_request.pair_description
@@ -29,4 +26,27 @@ class UpdatePairSerializer(ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['pair_request'] = instance.pair_request.pair_description
+        return representation
+    
+class CostPairSerializer(ModelSerializer):
+    class Meta:
+        model = Pair 
+        fields = [
+            'pair_request',
+            'date',
+            'cost',
+        ]
+
+class PayPairSerializer(ModelSerializer):
+    class Meta:
+        model = Pair
+        fields = [
+            'pair_request',
+            'date',
+            'cost',
+            'payed',
+        ]
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['pair_request'] = instance.pair_request.pair_description 
         return representation

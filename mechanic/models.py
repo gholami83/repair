@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 
 class Mechanic(models.Model):
-    mchanic = models.ForeignKey(get_user_model(),on_delete=models.CASCADE)
-    
+    mechanic = models.ForeignKey(get_user_model(),on_delete=models.CASCADE)
+    class Meta:
+        db_table = 'mechanic' 
     

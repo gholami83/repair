@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('authuser/',include('authuser.urls')),
     path('driver/',include('driver.urls')),
-    # path('mechanic/',include('mechanic.urls')),
+    path('mechanic/',include('mechanic.urls')),
     path('pair/',include('pair.urls')),
     # path('pay/',include('pay.urls')),
     path('technic-assist/',include('technical_assistant.urls')),
