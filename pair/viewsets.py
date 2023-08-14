@@ -6,10 +6,7 @@ from .api.serializers import MakePairSerializer, UpdatePairSerializer,CostPairSe
 
 class MakePairViewSets(ModelViewSet):
     def get_queryset(self):
-        if self.action == "create":
-            return Pair.objects.all()
-        else:
-            return Pair.objects.filter()
+        return Pair.objects.all()
 
     def get_permissions(self):
         if self.action == 'update':
