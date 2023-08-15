@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from ..models import Pair
 
 
@@ -14,17 +15,22 @@ class MakePairSerializer(ModelSerializer):
         return instance.pair_request.pair_description
 
 class UpdatePairSerializer(ModelSerializer):
+    
+    pair_request = serializers.SerializerMethodField()
+
     class Meta:
         model = Pair
         fields = [
             'pair_request',
             'date',
-            'asisstant_confirm',
+            'assistant_confirm',
         ]
+    
     def get_pair_request(self, instance):
         return instance.pair_request.pair_description
 
 class CostPairSerializer(ModelSerializer):
+    pair_request = serializers.SerializerMethodField()
     class Meta:
         model = Pair 
         fields = [

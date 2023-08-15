@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'technical_assistant',
     'rest_framework.authtoken',
     'gettoken',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -131,11 +132,18 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],  
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '3/minute',
+        'user': '5/minute'
+    },
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 
-    ]
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Repair',
+    'DESCRIPTION': 'repair your car!',
+    'VERSION': '1.0.0',
 }
