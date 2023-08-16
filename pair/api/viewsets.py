@@ -1,8 +1,8 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.throttling import AnonRateThrottle,UserRateThrottle
-from .models import Pair
-from .api.serializers import MakePairSerializer, UpdatePairSerializer,CostPairSerializer,PayPairSerializer
+from ..models import Pair
+from .serializers import MakePairSerializer, UpdatePairSerializer,CostPairSerializer,PayPairSerializer
 
 
 class MakePairViewSets(ModelViewSet):

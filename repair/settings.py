@@ -140,6 +140,10 @@ REST_FRAMEWORK = {
         'user': '5/minute'
     },
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    #     'DEFAULT_RENDERER_CLASSES': [
+    #     # 'rest_framework.renderers.AdminRenderer',
+    #     # 'rest_framework.renderers.BrowsableAPIRenderer', 
+    # ]
 }
 
 SPECTACULAR_SETTINGS = {
