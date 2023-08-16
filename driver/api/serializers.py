@@ -1,9 +1,21 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
+from rest_framework.fields import empty
 from ..models import Driver
 from pair.models import Pair
 
 
-class DriverSerializer(ModelSerializer):
+class DriverSerializer(serializers.ModelSerializer):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        view = self.context.get("view")
+        if view.action in [
+            "list",
+            "retrieve",
+        ] :
+            self.fields["driver"] = serializers.SerializerMethodField()
+
     class Meta:
         model = Driver
         fields = [

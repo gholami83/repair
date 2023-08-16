@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from .api.serializers import DriverSerializer
-from .models import Driver
+from .serializers import DriverSerializer
+from ..models import Driver
 
 
 class DriverViewSets(ModelViewSet):
