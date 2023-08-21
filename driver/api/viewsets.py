@@ -6,3 +6,7 @@ from ..models import Driver
 class DriverViewSets(ModelViewSet):
     queryset = Driver.objects.all()
     serializer_class = DriverSerializer
+    filterset_fields = [
+        'driver__username',
+        'pair_description',
+    ]
