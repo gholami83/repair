@@ -4,16 +4,12 @@ from ..models import Pair
 from driver.models import Driver
 
 
-class PairRequestSerializer(ModelSerializer):
-    class Meta:
-        model = Driver
-        fields =[
-            'driver',
-            'pair_description',
-        ]
+class PairRequestSerializer(serializers.RelatedField):
+    def to_representation(self, instance):
+        return instance.driver + instance.pair_description
 
 class MakePairSerializer(ModelSerializer):
-    pair_request = PairRequestSerializer()
+    pair_request = PairRequestSerializer(read_only = True)
     class Meta:
         model = Pair
         fields = [
@@ -21,11 +17,13 @@ class MakePairSerializer(ModelSerializer):
             'date',
         ]   
         
-    # def get_pair_request(self, instance):
-    #     return instance.pair_request.pair_description
+    def get_pair_request(self, instance):
+        return {
+            "username":instance.pair_request.driver.username,
+            "pair_description":instance.pair_request.pair_description,
+            }
 
 class UpdatePairSerializer(ModelSerializer):
-    
     pair_request = serializers.SerializerMethodField()
 
     class Meta:
@@ -37,8 +35,10 @@ class UpdatePairSerializer(ModelSerializer):
         ]
     
     def get_pair_request(self, instance):
-        return instance.pair_request.pair_description
-
+         return {
+            "username":instance.pair_request.driver.username,
+            "pair_description":instance.pair_request.pair_description,
+            }
 class CostPairSerializer(ModelSerializer):
     pair_request = serializers.SerializerMethodField()
     class Meta:

@@ -5,34 +5,26 @@ from ..models import Driver
 from pair.models import Pair
 
 
-class DriverUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = get_user_model()
-        fields = [
-            'username',
-            'email',
-            'password',
-        ]
-
 class DriverSerializer(serializers.ModelSerializer):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        view = self.context.get("view")
-        if view.action in [
-            "list",
-            "retrieve",
-        ]:
-            self.fields["driver"] = serializers.SerializerMethodField()
-
+    driver = serializers.SerializerMethodField()
     class Meta:
-        driver = DriverUserSerializer()
         model = Driver
         fields = [
             'driver',
             'pair_description',
         ]
-    def get_driver(self, instance):
-        return instance.driver.username
+    def get_driver(self,instance):
+        return {
+            "username":instance.driver.username,
+            "email":instance.driver.email,
+        }
 
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+
+        # view = self.context.get("view")
+        # if view.action in [
+        #     "list",
+        #     "retrieve",
+        # ]:
+        #     self.fields["driver"] = serializers.SerializerMethodField()
