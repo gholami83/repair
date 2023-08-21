@@ -1,3 +1,5 @@
+import django_filters.rest_framework
+from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.throttling import AnonRateThrottle,UserRateThrottle
@@ -6,13 +8,23 @@ from .serializers import MakePairSerializer, UpdatePairSerializer,CostPairSerial
 
 
 class MakePairViewSets(ModelViewSet):
-    throttle_classes = [
+    queryset = Pair.objects.all()
+    filterset_fields  = ['date','assistant_confirm']
+    search_fields = ['date']
+    ordering_fields= ["date"]
+    throttle_classes = [    
         UserRateThrottle,
         AnonRateThrottle,
     ]
-    def get_queryset(self):
-        return Pair.objects.all()
-
+    # def get_queryset(self):
+    #     queryset = Pair.objects.all()
+    #     assistant_confirm = self.request.query_params.get('assistant_confirm')
+    #     date = self.request.query_params.get('date')
+    #     pair_request = self.request.query_params.get('pair_request')
+    #     if assistant_confirm and date is not None:
+    #         queryset = queryset.filter(assistant_confirm = assistant_confirm,date = date, pair_request_username = pair_request)
+    #     return queryset
+    
     def get_permissions(self):
         if self.action == 'update':
             return [IsAuthenticated()]

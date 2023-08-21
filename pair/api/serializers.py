@@ -38,6 +38,8 @@ class CostPairSerializer(ModelSerializer):
             'date',
             'cost',
         ]
+    def get_pair_request(self, instance):
+        return instance.pair_request.pair_description
 
 class PayPairSerializer(ModelSerializer):
     class Meta:
