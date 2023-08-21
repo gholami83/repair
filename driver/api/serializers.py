@@ -1,8 +1,18 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.fields import empty
 from ..models import Driver
 from pair.models import Pair
 
+
+class DriverUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = [
+            'username',
+            'email',
+            'password',
+        ]
 
 class DriverSerializer(serializers.ModelSerializer):
 
@@ -13,10 +23,11 @@ class DriverSerializer(serializers.ModelSerializer):
         if view.action in [
             "list",
             "retrieve",
-        ] :
+        ]:
             self.fields["driver"] = serializers.SerializerMethodField()
 
     class Meta:
+        driver = DriverUserSerializer()
         model = Driver
         fields = [
             'driver',
