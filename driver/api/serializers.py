@@ -18,13 +18,3 @@ class DriverSerializer(serializers.ModelSerializer):
             "username":instance.driver.username,
             "email":instance.driver.email,
         }
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-
-        # view = self.context.get("view")
-        # if view.action in [
-        #     "list",
-        #     "retrieve",
-        # ]:
-        #     self.fields["driver"] = serializers.SerializerMethodField()
